@@ -12,6 +12,7 @@
   "devDependencies": {
     "css-loader": "^6.8.1",
     "cz-conventional-changelog": "^3.3.0",
+    "esbuild-loader": "^4.0.2",
     "html-webpack-plugin": "^5.5.4",
     "less": "^4.2.0",
     "less-loader": "^11.1.3",
