@@ -1,5 +1,7 @@
-<script setup></script>
+<script setup>
+import StylePlayground from "./StylePlayground/index.vue";
+</script>
 
 <template>
-  <div>Hello World!</div>
+  <StylePlayground />
 </template>
