@@ -1,12 +1,18 @@
 {
-  "name": "vue-webpack-tool",
+  "name": "@unify-js/vue-webpack-tool",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./bin/cli.js",
   "scripts": {
     "start": "webpack serve --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js"
   },
+  "bin": {
+    "vue-webpack-tool": "./bin/cli.js"
+  },
+  "files": [
+    "bin"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -20,15 +26,13 @@
     "sass": "^1.69.5",
     "sass-loader": "^13.3.2",
     "style-loader": "^3.3.3",
+    "vue": "^3.3.11",
     "vue-loader": "^17.3.1",
     "vue-template-compiler": "^2.7.15",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1",
     "webpack-merge": "^5.10.0"
-  },
-  "dependencies": {
-    "vue": "^3.3.11"
   },
   "config": {
     "commitizen": {
