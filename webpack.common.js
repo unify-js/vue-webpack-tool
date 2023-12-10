@@ -4,17 +4,14 @@ const { VueLoaderPlugin } = require("vue-loader");
 const webpack = require("webpack");
 
 module.exports = {
-  mode: "development",
   entry: "./src/main.js",
-  devtool: "inline-source-map",
-  devServer: {
-    static: "./dist",
-  },
+
   output: {
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
   },
+
   plugins: [
     new webpack.ProgressPlugin(),
     new webpack.DefinePlugin({
@@ -27,6 +24,7 @@ module.exports = {
     }),
     new VueLoaderPlugin(),
   ],
+
   module: {
     rules: [
       {
