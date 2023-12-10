@@ -3,6 +3,8 @@ const HTMLWebpackPlugin = require("html-webpack-plugin");
 const { VueLoaderPlugin } = require("vue-loader");
 const webpack = require("webpack");
 
+const loaderConfig = require("./loader-configs");
+
 module.exports = {
   entry: "./src/main.js",
 
@@ -31,116 +33,7 @@ module.exports = {
         test: /\.vue$/,
         use: "vue-loader",
       },
-
-      // https://github.com/privatenumber/esbuild-loader-examples/blob/master/examples/vue-loader/webpack.config.js
-      {
-        test: /\.js$/,
-        loader: "esbuild-loader",
-        options: {
-          loader: "js",
-          target: "es2015",
-        },
-      },
-
-      {
-        test: /\.jsx$/,
-        loader: "esbuild-loader",
-        options: {
-          loader: "jsx",
-          target: "es2015",
-        },
-      },
-
-      {
-        test: /\.ts$/,
-        loader: "esbuild-loader",
-        options: {
-          loader: "ts",
-          target: "es2015",
-        },
-      },
-
-      {
-        test: /\.tsx$/,
-        loader: "esbuild-loader",
-        options: {
-          loader: "tsx",
-          target: "es2015",
-        },
-      },
-
-      {
-        test: /\.css$/,
-        oneOf: [
-          // this matches `<style module>`
-          {
-            resourceQuery: /module/,
-            use: [
-              "style-loader",
-              {
-                loader: "css-loader",
-                options: {
-                  modules: {
-                    localIdentName: "[local]_[hash:base64]",
-                  },
-                },
-              },
-            ],
-          },
-          // this matches plain `<style>` or `<style scoped>`
-          {
-            use: ["style-loader", "css-loader"],
-          },
-        ],
-      },
-
-      {
-        test: /\.scss$/,
-        oneOf: [
-          {
-            resourceQuery: /module/,
-            use: [
-              "style-loader",
-              {
-                loader: "css-loader",
-                options: {
-                  modules: {
-                    localIdentName: "[local]_[hash:base64]",
-                  },
-                },
-              },
-              "sass-loader",
-            ],
-          },
-          {
-            use: ["style-loader", "css-loader", "sass-loader"],
-          },
-        ],
-      },
-
-      {
-        test: /\.less$/,
-        oneOf: [
-          {
-            resourceQuery: /module/,
-            use: [
-              "style-loader",
-              {
-                loader: "css-loader",
-                options: {
-                  modules: {
-                    localIdentName: "[local]_[hash:base64]",
-                  },
-                },
-              },
-              "less-loader",
-            ],
-          },
-          {
-            use: ["style-loader", "css-loader", "less-loader"],
-          },
-        ],
-      },
+      ...loaderConfig,
     ],
   },
   optimization: {
