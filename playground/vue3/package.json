@@ -4,8 +4,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "vue-webpack-tool",
-    "build": ""
+    "dev": "vue-webpack-tool dev"
   },
   "keywords": [],
   "author": "",
