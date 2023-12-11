@@ -9,4 +9,7 @@ module.exports = merge(common, {
     // https://webpack.js.org/configuration/dev-server/#devserverhistoryapifallback
     historyApiFallback: true,
   },
+  experiments: {
+    lazyCompilation: true,
+  },
 });
