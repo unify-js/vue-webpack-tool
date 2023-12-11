@@ -1,17 +1,21 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import StylePlayground from "./StylePlayground/index.vue";
+import EsbuildPlayground from "./EsbuildPlayground/index.vue";
 
 export const routes = [
-  { path: "/style", component: StylePlayground, meta: { title: "style" } },
   {
     path: "/esbuild",
-    component: () => import("./EsbuildPlayground/index.vue"),
+    component: EsbuildPlayground,
     meta: { title: "esbuild" },
+  },
+  {
+    path: "/style",
+    component: () => import("./StylePlayground/index.vue"),
+    meta: { title: "style" },
   },
 ] as const;
 
 export const router = createRouter({
   history: createWebHistory(),
-  routes: [{ path: "/", redirect: "/style" }, ...routes],
+  routes: [{ path: "/", redirect: "/esbuild" }, ...routes],
 });
