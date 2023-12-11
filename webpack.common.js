@@ -6,12 +6,17 @@ const webpack = require("webpack");
 const loaderConfig = require("./loader-configs");
 
 module.exports = {
-  entry: "./src/main.js",
+  entry: "./src/main",
 
   output: {
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
+  },
+
+  resolve: {
+    // https://webpack.js.org/configuration/dev-server/#devserverhistoryapifallback
+    extensions: [".ts", ".tsx", "..."],
   },
 
   plugins: [
@@ -21,7 +26,6 @@ module.exports = {
       __VUE_PROD_DEVTOOLS__: false,
     }),
     new HTMLWebpackPlugin({
-      title: "Vue.js",
       template: "./index.html",
     }),
     new VueLoaderPlugin(),
