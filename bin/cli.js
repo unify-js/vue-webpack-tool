@@ -5,7 +5,7 @@ const WebpackDevServer = require("webpack-dev-server");
 const { Command } = require("commander");
 
 const packageJson = require("../package.json");
-const webpackDevConfig = require("../webpack.dev.js");
+const webpackDevConfig = require("../lib/webpack.dev.js");
 
 const program = new Command();
 program

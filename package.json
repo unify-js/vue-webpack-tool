@@ -14,7 +14,8 @@
     "vue-webpack-tool": "./bin/cli.js"
   },
   "files": [
-    "bin"
+    "bin",
+    "lib"
   ],
   "keywords": [],
   "author": "",
