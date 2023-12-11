@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-const a = ref<string>();
-
-console.log("a", a);
+const count = ref<number>(0);
 </script>
 
 <template>
-  <div></div>
+  <div>
+    <button @click="count++">click</button>
+
+    <span>{{ count }}</span>
+  </div>
 </template>
 
 <style lang="scss" scoped></style>
