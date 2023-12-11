@@ -18,7 +18,6 @@ if [ ! -z "$is_modify" ]; then
     git add .
     git commit -m "build: update packages version"
 
-    npm run build || utils::check_fail $? "npm run build failed"
     npm publish || utils::check_fail $? "npm publish failed"
 
     git push || utils::check_fail $? "git push failed"
