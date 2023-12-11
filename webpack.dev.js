@@ -6,5 +6,7 @@ module.exports = merge(common, {
   devtool: "inline-source-map",
   devServer: {
     static: "./dist",
+    // https://webpack.js.org/configuration/dev-server/#devserverhistoryapifallback
+    historyApiFallback: true,
   },
 });
