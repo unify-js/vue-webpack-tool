@@ -1,6 +1,6 @@
 # @unify-js/vue-webpack-tool
 
-A super fast build tool based webpack for vue project.
+A webpack-based build tool for vue project which is faster than vue-cli-service.
 
 ## Usage
 
