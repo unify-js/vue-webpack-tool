@@ -1,5 +1,12 @@
 # @unify-js/vue-webpack-tool
 
+## 0.2.1
+
+### Patch Changes
+
+- cfb9112: modify "devServer.static"
+- 299861d: change "devtool" from "inline-source-map" to "eval-source-map"
+
 ## 0.2.0
 
 ### Minor Changes
