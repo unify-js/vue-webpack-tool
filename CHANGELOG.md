@@ -1,5 +1,11 @@
 # @unify-js/vue-webpack-tool
 
+## 0.2.2
+
+### Patch Changes
+
+- 8a76e4c: configure cache
+
 ## 0.2.1
 
 ### Patch Changes
