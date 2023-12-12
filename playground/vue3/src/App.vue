@@ -5,9 +5,9 @@ import { routes } from "./routers";
 <template>
   <div :class="$style.container">
     <div :class="$style.nav">
-      <router-link v-for="route in routes" :key="route.path" :to="route.path">{{
-        route.meta.title
-      }}</router-link>
+      <router-link v-for="route in routes" :key="route.path" :to="route.path">
+        {{ route.meta.title }}
+      </router-link>
     </div>
 
     <div>

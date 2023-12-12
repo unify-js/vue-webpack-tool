@@ -6,7 +6,10 @@
   "scripts": {
     "cz": "cz",
     "cs": "changeset",
-    "csv": "changeset version"
+    "csv": "changeset version",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "bin": {
     "vue-webpack-tool": "./bin/cli.js"
