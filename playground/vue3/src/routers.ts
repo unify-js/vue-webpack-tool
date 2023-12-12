@@ -13,6 +13,11 @@ export const routes = [
     component: () => import("./StylePlayground/index.vue"),
     meta: { title: "style" },
   },
+  {
+    path: "/access",
+    component: () => import("./AccessPlayground/index.vue"),
+    meta: { title: "access" },
+  },
 ] as const;
 
 export const router = createRouter({
