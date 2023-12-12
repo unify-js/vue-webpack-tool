@@ -24,11 +24,11 @@ const images = [
 <style lang="scss" scoped>
 @font-face {
   font-family: "myFont";
-  src: url("./font/HedvigLettersSerif-Regular-VariableFont_opsz.ttf")
-    format("ttf");
+  src: url("./font/HedvigLettersSerif-Regular-VariableFont_opsz.ttf");
 }
 
-h1 {
+h1,
+h2 {
   font-family: "myFont";
 }
 </style>
