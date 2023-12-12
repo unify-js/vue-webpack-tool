@@ -1,5 +1,11 @@
 # @unify-js/vue-webpack-tool
 
+## 0.2.0
+
+### Minor Changes
+
+- 064bf41: Use built-in asset modules to load images
+
 ## 0.1.0
 
 ### Minor Changes
