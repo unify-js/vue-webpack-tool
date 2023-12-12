@@ -10,8 +10,10 @@ const webpackProdConfig = require("../lib/webpack.prod.js");
 
 const program = new Command();
 program
-  .name("vue-webpack-tool")
-  .description("CLI to build Vue.js apps")
+  .name("Vue Webpack Tool")
+  .description(
+    "A webpack-based build tool for Vue development that focuses on the build performance."
+  )
   .version(packageJson.version);
 
 program.command("dev").action(() => {
