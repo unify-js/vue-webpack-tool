@@ -12,6 +12,7 @@ if [ ! -z "$is_modify" ]; then
     echo "packages version changed"
 
     npm install || utils::check_fail $? "npm install failed" 
+    npm run build || utils::check_fail $? "npm run build failed"
 
     git config user.name "luohuidong"
     git config user.email "luohuidong01@126.com"
