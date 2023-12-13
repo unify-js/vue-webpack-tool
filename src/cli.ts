@@ -11,8 +11,6 @@ import createWebpackDevConfig from './configs/webpack.dev.js';
 import createWebpackProdConfig from './configs/webpack.prod.js';
 import createWebpackDllConfig from './configs/webpack.dll.js';
 
-console.log('test');
-
 const program = new Command();
 program
   .name('Vue Webpack Tool')
