@@ -1,24 +1,23 @@
-const path = require("node:path");
-const HTMLWebpackPlugin = require("html-webpack-plugin");
-const { VueLoaderPlugin } = require("vue-loader");
-const webpack = require("webpack");
+import HTMLWebpackPlugin from 'html-webpack-plugin';
+import { VueLoaderPlugin } from 'vue-loader';
+import webpack from 'webpack';
 
-const loaderConfig = require("./loader-configs");
-const { outputDirectory } = require("./utils");
+import loaderConfig from './loader-configs/index.js';
+import { outputDirectory } from '../utils/index.js';
 
-module.exports = function createWebpackCommonConfig() {
+export default function createWebpackCommonConfig(): webpack.Configuration {
   return {
-    entry: "./src/main",
+    entry: './src/main',
 
     output: {
-      filename: "[name].[contenthash].js",
+      filename: '[name].[contenthash].js',
       path: outputDirectory,
       clean: true,
     },
 
     resolve: {
       // https://webpack.js.org/configuration/dev-server/#devserverhistoryapifallback
-      extensions: [".ts", ".js", ".tsx", ".json", ".wasm"],
+      extensions: ['.ts', '.js', '.tsx', '.json', '.wasm'],
     },
 
     plugins: [
@@ -28,7 +27,7 @@ module.exports = function createWebpackCommonConfig() {
         __VUE_PROD_DEVTOOLS__: false,
       }),
       new HTMLWebpackPlugin({
-        template: "./index.html",
+        template: './index.html',
       }),
       new VueLoaderPlugin(),
     ],
@@ -37,24 +36,24 @@ module.exports = function createWebpackCommonConfig() {
       rules: [
         {
           test: /\.vue$/,
-          use: "vue-loader",
+          use: 'vue-loader',
         },
         ...loaderConfig,
       ],
     },
     // https://webpack.js.org/guides/caching/
     optimization: {
-      moduleIds: "deterministic",
-      runtimeChunk: "single",
+      moduleIds: 'deterministic',
+      runtimeChunk: 'single',
       splitChunks: {
         cacheGroups: {
           vendor: {
             test: /[\\/]node_modules[\\/]/,
-            name: "vendors",
-            chunks: "all",
+            name: 'vendors',
+            chunks: 'all',
           },
         },
       },
     },
   };
-};
+}

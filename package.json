@@ -2,8 +2,11 @@
   "name": "@unify-js/vue-webpack-tool",
   "version": "0.2.2",
   "description": "A webpack-based build tool for Vue development that focuses on the build performance.",
+  "type": "module",
   "main": "./bin/cli.js",
   "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc && chmod +x ./bin/cli.js",
     "cz": "cz",
     "cs": "changeset",
     "csv": "changeset version",
@@ -23,7 +26,10 @@
   "license": "ISC",
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
+    "@types/node": "^20.10.4",
+    "@types/webpack": "^5.28.5",
     "cz-conventional-changelog": "^3.3.0",
+    "typescript": "^5.3.3",
     "vitepress": "^1.0.0-rc.31"
   },
   "peerDependencies": {
