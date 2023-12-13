@@ -77,12 +77,32 @@ program
 
 program
   .command("clear")
-  .option("--cache", "clear webpack cache")
+  .option("--all", "clear all generated files")
+  .option("--cache", "clear cache")
+  .option("--dll", "clear dll")
+  .option("--output", "clear output")
   .action((options) => {
-    if (options.cache) {
+    const all = Object.keys(options).length === 0 || options.all;
+
+    if (all || options.cache) {
       console.log("Clearing cache...");
       fs.rmSync(cacheDirectory, { force: true, recursive: true });
       console.log("Cache cleared!");
+    }
+
+    if (all || options.dll) {
+      console.log("Clearing dll...");
+      fs.rmSync(dllDirectory, { force: true, recursive: true });
+      console.log("Dll cleared!");
+    }
+
+    if (all || options.output) {
+      console.log("Clearing output...");
+      fs.rmSync(webpackProdConfig.output.path, {
+        force: true,
+        recursive: true,
+      });
+      console.log("Output cleared!");
     }
   });
 
