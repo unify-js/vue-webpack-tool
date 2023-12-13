@@ -4,9 +4,11 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "postinstall": "vue-webpack-tool clear --cache",
+    "postinstall": "vue-webpack-tool clear",
     "dev": "vue-webpack-tool dev",
-    "build": "vue-webpack-tool build"
+    "dev:dll": "vue-webpack-tool dll --dev",
+    "build": "vue-webpack-tool build",
+    "build:dll": "vue-webpack-tool dll"
   },
   "keywords": [],
   "author": "",
