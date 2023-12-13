@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "tsc --watch",
     "build": "tsc && chmod +x ./bin/cli.js",
+    "format": "prettier ./src --write",
     "cz": "cz",
     "cs": "changeset",
     "csv": "changeset version",
@@ -29,6 +30,7 @@
     "@types/node": "^20.10.4",
     "@types/webpack": "^5.28.5",
     "cz-conventional-changelog": "^3.3.0",
+    "prettier": "3.1.1",
     "typescript": "^5.3.3",
     "vitepress": "^1.0.0-rc.31"
   },
