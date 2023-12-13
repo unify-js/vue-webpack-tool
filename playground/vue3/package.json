@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "postinstall": "vue-webpack-tool clear --cache",
     "dev": "vue-webpack-tool dev",
     "build": "vue-webpack-tool build"
   },

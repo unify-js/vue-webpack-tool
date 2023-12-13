@@ -3,10 +3,12 @@
 const webpack = require("webpack");
 const WebpackDevServer = require("webpack-dev-server");
 const { Command } = require("commander");
+const fs = require("fs");
 
 const packageJson = require("../package.json");
 const webpackDevConfig = require("../lib/webpack.dev.js");
 const webpackProdConfig = require("../lib/webpack.prod.js");
+const { cacheDirectory } = require("../lib/utils.js");
 
 const program = new Command();
 program
@@ -52,5 +54,16 @@ program.command("build").action(() => {
     console.log(stats.toString());
   });
 });
+
+program
+  .command("clear")
+  .option("--cache", "clear webpack cache")
+  .action((options) => {
+    if (options.cache) {
+      console.log("Clearing cache...");
+      fs.rmSync(cacheDirectory, { force: true, recursive: true });
+      console.log("Cache cleared!");
+    }
+  });
 
 program.parse();
