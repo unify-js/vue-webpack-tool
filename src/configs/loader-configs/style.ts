@@ -1,4 +1,4 @@
-module.exports = [
+export default [
   {
     test: /\.css$/,
     oneOf: [
@@ -6,12 +6,12 @@ module.exports = [
       {
         resourceQuery: /module/,
         use: [
-          "style-loader",
+          'style-loader',
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
               modules: {
-                localIdentName: "[local]_[hash:base64]",
+                localIdentName: '[local]_[hash:base64]',
               },
             },
           },
@@ -19,7 +19,7 @@ module.exports = [
       },
       // this matches plain `<style>` or `<style scoped>`
       {
-        use: ["style-loader", "css-loader"],
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
@@ -30,20 +30,20 @@ module.exports = [
       {
         resourceQuery: /module/,
         use: [
-          "style-loader",
+          'style-loader',
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
               modules: {
-                localIdentName: "[local]_[hash:base64]",
+                localIdentName: '[local]_[hash:base64]',
               },
             },
           },
-          "sass-loader",
+          'sass-loader',
         ],
       },
       {
-        use: ["style-loader", "css-loader", "sass-loader"],
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
     ],
   },
@@ -54,20 +54,20 @@ module.exports = [
       {
         resourceQuery: /module/,
         use: [
-          "style-loader",
+          'style-loader',
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
               modules: {
-                localIdentName: "[local]_[hash:base64]",
+                localIdentName: '[local]_[hash:base64]',
               },
             },
           },
-          "less-loader",
+          'less-loader',
         ],
       },
       {
-        use: ["style-loader", "css-loader", "less-loader"],
+        use: ['style-loader', 'css-loader', 'less-loader'],
       },
     ],
   },

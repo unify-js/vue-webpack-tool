@@ -1,5 +1,6 @@
 node_modules
 bin
+.tsbuildinfo
 
 # vitepress
 docs/.vitepress/dist
