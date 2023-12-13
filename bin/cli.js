@@ -7,9 +7,13 @@ const fs = require("fs");
 const { merge } = require("webpack-merge");
 
 const packageJson = require("../package.json");
-const { cacheDirectory, dllDirectory } = require("../lib/utils.js");
-const webpackDevConfig = require("../lib/webpack.dev.js");
-const webpackProdConfig = require("../lib/webpack.prod.js");
+const {
+  cacheDirectory,
+  dllDirectory,
+  outputDirectory,
+} = require("../lib/utils.js");
+const createWebpackDevConfig = require("../lib/webpack.dev.js");
+const createWebpackProdConfig = require("../lib/webpack.prod.js");
 const webpackDllConfig = require("../lib/webpack.dll.js");
 
 const program = new Command();
@@ -21,6 +25,7 @@ program
   .version(packageJson.version);
 
 program.command("dev").action(() => {
+  const webpackDevConfig = createWebpackDevConfig();
   const compiler = webpack(webpackDevConfig);
   const server = new WebpackDevServer(webpackDevConfig.devServer, compiler);
   const runServer = async () => {
@@ -56,6 +61,7 @@ function displayInfo(err, stats) {
 }
 
 program.command("build").action(() => {
+  const webpackProdConfig = createWebpackProdConfig();
   webpack(webpackProdConfig, displayInfo);
 });
 
@@ -98,7 +104,7 @@ program
 
     if (all || options.output) {
       console.log("Clearing output...");
-      fs.rmSync(webpackProdConfig.output.path, {
+      fs.rmSync(outputDirectory, {
         force: true,
         recursive: true,
       });
