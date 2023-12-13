@@ -4,11 +4,13 @@ const webpack = require("webpack");
 const WebpackDevServer = require("webpack-dev-server");
 const { Command } = require("commander");
 const fs = require("fs");
+const { merge } = require("webpack-merge");
 
 const packageJson = require("../package.json");
+const { cacheDirectory, dllDirectory } = require("../lib/utils.js");
 const webpackDevConfig = require("../lib/webpack.dev.js");
 const webpackProdConfig = require("../lib/webpack.prod.js");
-const { cacheDirectory } = require("../lib/utils.js");
+const webpackDllConfig = require("../lib/webpack.dll.js");
 
 const program = new Command();
 program
@@ -27,33 +29,51 @@ program.command("dev").action(() => {
   runServer();
 });
 
+function displayInfo(err, stats) {
+  // https://webpack.js.org/api/node/#error-handling
+
+  // The err object will only contain webpack-related issues, such as misconfiguration
+  if (err) {
+    console.error(err.stack || err);
+    if (err.details) {
+      console.error(err.details);
+    }
+
+    return;
+  }
+
+  const info = stats.toJson();
+
+  if (stats.hasErrors()) {
+    console.error(info.errors);
+  }
+
+  if (stats.hasWarnings()) {
+    console.warn(info.warnings);
+  }
+
+  console.log(stats.toString());
+}
+
 program.command("build").action(() => {
-  webpack(webpackProdConfig, (err, stats) => {
-    // https://webpack.js.org/api/node/#error-handling
-
-    // The err object will only contain webpack-related issues, such as misconfiguration
-    if (err) {
-      console.error(err.stack || err);
-      if (err.details) {
-        console.error(err.details);
-      }
-
-      return;
-    }
-
-    const info = stats.toJson();
-
-    if (stats.hasErrors()) {
-      console.error(info.errors);
-    }
-
-    if (stats.hasWarnings()) {
-      console.warn(info.warnings);
-    }
-
-    console.log(stats.toString());
-  });
+  webpack(webpackProdConfig, displayInfo);
 });
+
+program
+  .command("dll")
+  .option("--dev", "dev mode dll")
+  .action((options) => {
+    console.log("Clearing dll...");
+    fs.rmSync(dllDirectory, { force: true, recursive: true });
+    console.log("Dll cleared!");
+
+    webpack(
+      merge(webpackDllConfig, {
+        mode: options.dev ? "development" : "production",
+      }),
+      displayInfo
+    );
+  });
 
 program
   .command("clear")
