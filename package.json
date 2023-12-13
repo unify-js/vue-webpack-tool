@@ -5,7 +5,7 @@
   "type": "module",
   "main": "./bin/cli.js",
   "scripts": {
-    "dev": "tsc --watch && chmod +x ./bin/cli.js",
+    "dev": "tsc --watch",
     "build": "tsc && chmod +x ./bin/cli.js",
     "format": "prettier ./src --write",
     "cz": "cz",

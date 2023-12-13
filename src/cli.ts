@@ -6,7 +6,7 @@ import { Command } from 'commander';
 import fs from 'node:fs';
 import { merge } from 'webpack-merge';
 
-import { cacheDirectory, dllDirectory, outputDirectory, projectPackageJson } from './utils/index.js';
+import { cacheDirectory, outputDirectory, projectPackageJson } from './utils/index.js';
 import createWebpackDevConfig from './configs/webpack.dev.js';
 import createWebpackProdConfig from './configs/webpack.prod.js';
 import createWebpackDllConfig from './configs/webpack.dll.js';
@@ -61,9 +61,9 @@ program
   .command('dll')
   .option('--dev', 'dev mode dll')
   .action((options) => {
-    console.log('Clearing dll...');
-    fs.rmSync(dllDirectory, { force: true, recursive: true });
-    console.log('Dll cleared!');
+    console.log('Clearing output...');
+    fs.rmSync(outputDirectory, { force: true, recursive: true });
+    console.log('Output cleared!');
 
     webpack(
       merge(createWebpackDllConfig(), {
@@ -77,7 +77,6 @@ program
   .command('clear')
   .option('--all', 'clear all generated files')
   .option('--cache', 'clear cache')
-  .option('--dll', 'clear dll')
   .option('--output', 'clear output')
   .action((options) => {
     const all = Object.keys(options).length === 0 || options.all;
@@ -86,12 +85,6 @@ program
       console.log('Clearing cache...');
       fs.rmSync(cacheDirectory, { force: true, recursive: true });
       console.log('Cache cleared!');
-    }
-
-    if (all || options.dll) {
-      console.log('Clearing dll...');
-      fs.rmSync(dllDirectory, { force: true, recursive: true });
-      console.log('Dll cleared!');
     }
 
     if (all || options.output) {
