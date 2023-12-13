@@ -1,5 +1,19 @@
 # @unify-js/vue-webpack-tool
 
+## 0.3.0
+
+### Minor Changes
+
+- 1be8f84: support using DLL
+- d4c3763: write the plugin to inject dll files into the html file
+- 2ca42f9: supporting DLL files for both development and production environments.
+- c80b3c4: The clear command supports cleaning the output and DLL folders.
+- bc031b1: add "clear" command
+
+### Patch Changes
+
+- c44be25: Refactor the code using TypeScript.
+
 ## 0.2.2
 
 ### Patch Changes
