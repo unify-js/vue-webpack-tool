@@ -18,15 +18,18 @@ program
   .description('A webpack-based build tool for Vue development that focuses on the build performance.')
   .version(projectPackageJson.version);
 
-program.command('dev').action(() => {
-  const webpackDevConfig = createWebpackDevConfig();
-  const compiler = webpack(webpackDevConfig);
-  const server = new WebpackDevServer(webpackDevConfig.devServer, compiler);
-  const runServer = async () => {
-    await server.start();
-  };
-  runServer();
-});
+program
+  .command('dev')
+  .description('start dev server')
+  .action(() => {
+    const webpackDevConfig = createWebpackDevConfig();
+    const compiler = webpack(webpackDevConfig);
+    const server = new WebpackDevServer(webpackDevConfig.devServer, compiler);
+    const runServer = async () => {
+      await server.start();
+    };
+    runServer();
+  });
 
 function displayInfo(err: Error | undefined, stats: webpack.Stats | undefined) {
   // https://webpack.js.org/api/node/#error-handling
@@ -53,17 +56,20 @@ function displayInfo(err: Error | undefined, stats: webpack.Stats | undefined) {
   }
 }
 
-program.command('build').action(() => {
-  const webpackProdConfig = createWebpackProdConfig();
-  webpack(webpackProdConfig, displayInfo);
-});
+program
+  .command('build')
+  .description('build for production')
+  .action(() => {
+    const webpackProdConfig = createWebpackProdConfig();
+    webpack(webpackProdConfig, displayInfo);
+  });
 
 program
   .command('dll')
-  .description('generate dll file')
-  .option('--prod', 'generate production mode dll file')
+  .description('generate DLL file')
+  .option('--prod', 'generate production mode DLL file')
   .action((options) => {
-    const spinner = ora('clearing old dll files...').start();
+    const spinner = ora('clearing old DLL files...').start();
     fs.rmSync(dllDirectory, { force: true, recursive: true });
     spinner.succeed('old dll files!');
 
@@ -77,12 +83,12 @@ program
 
 program
   .command('clear')
-  .option('--all', 'clear all generated files')
-  .option('--cache', 'clear cache')
-  .option('--output', 'clear output')
-  .option('--dll', 'clear dll')
+  .description('clear all generate file')
+  .option('--cache', 'only clear cache files')
+  .option('--output', 'only clear output files')
+  .option('--dll', 'only clear dll files')
   .action((options) => {
-    const all = Object.keys(options).length === 0 || options.all;
+    const all = Object.keys(options).length === 0;
 
     if (all || options.cache) {
       const spinner = ora('clearing old cache files...').start();
