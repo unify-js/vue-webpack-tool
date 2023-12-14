@@ -4,8 +4,8 @@ import webpack from 'webpack';
 import fs from 'node:fs';
 
 import loaderConfig from './loader-configs/index.js';
-import { outputDirectory, dllManifestPath } from '../utils/index.js';
-import { DllInjectHtml } from '../plugins/index.js';
+import { projectOutputDirectory, dllManifestPath, dllDirectory } from '../utils/index.js';
+import { HtmlInjectDllPlugin } from './plugins/index.js';
 
 export default function createWebpackCommonConfig(): webpack.Configuration {
   const plugins: webpack.Configuration['plugins'] = [
@@ -28,10 +28,13 @@ export default function createWebpackCommonConfig(): webpack.Configuration {
       })
     );
 
-    const dllFiles = fs
-      .readdirSync(outputDirectory)
-      .filter((item) => item.startsWith('vendor_dll_') && item.endsWith('.js'));
-    plugins.push(new DllInjectHtml(dllFiles));
+    plugins.push(
+      new HtmlInjectDllPlugin({
+        projectOutputDirectory,
+        dllDirectory,
+        dllFileNamePrefix: 'vendor_dll_',
+      })
+    );
   }
 
   return {
@@ -39,7 +42,8 @@ export default function createWebpackCommonConfig(): webpack.Configuration {
 
     output: {
       filename: '[name].[contenthash].js',
-      path: outputDirectory,
+      path: projectOutputDirectory,
+      clean: true,
     },
 
     resolve: {

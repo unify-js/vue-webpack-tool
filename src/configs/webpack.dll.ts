@@ -1,6 +1,6 @@
 import webpack from 'webpack';
 
-import { outputDirectory, dllManifestPath, projectPackageJson } from '../utils/index.js';
+import { dllDirectory, dllManifestPath, projectPackageJson } from '../utils/index.js';
 
 export default function createWebpackDllConfig(): webpack.Configuration {
   const dllname = 'vendor_[fullhash]';
@@ -14,7 +14,7 @@ export default function createWebpackDllConfig(): webpack.Configuration {
     },
     output: {
       filename: 'vendor_dll_[fullhash].js',
-      path: outputDirectory,
+      path: dllDirectory,
       library: dllname,
     },
     plugins: [

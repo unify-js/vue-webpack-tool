@@ -5,8 +5,9 @@ import WebpackDevServer from 'webpack-dev-server';
 import { Command } from 'commander';
 import fs from 'node:fs';
 import { merge } from 'webpack-merge';
+import ora from 'ora';
 
-import { cacheDirectory, outputDirectory, projectPackageJson } from './utils/index.js';
+import { cacheDirectory, projectOutputDirectory, projectPackageJson, dllDirectory } from './utils/index.js';
 import createWebpackDevConfig from './configs/webpack.dev.js';
 import createWebpackProdConfig from './configs/webpack.prod.js';
 import createWebpackDllConfig from './configs/webpack.dll.js';
@@ -59,15 +60,16 @@ program.command('build').action(() => {
 
 program
   .command('dll')
-  .option('--dev', 'dev mode dll')
+  .description('generate dll file')
+  .option('--prod', 'generate production mode dll file')
   .action((options) => {
-    console.log('Clearing output...');
-    fs.rmSync(outputDirectory, { force: true, recursive: true });
-    console.log('Output cleared!');
+    const spinner = ora('clearing old dll files...').start();
+    fs.rmSync(dllDirectory, { force: true, recursive: true });
+    spinner.succeed('old dll files!');
 
     webpack(
       merge(createWebpackDllConfig(), {
-        mode: options.dev ? 'development' : 'production',
+        mode: options.prod ? 'production' : 'development',
       }),
       displayInfo
     );
@@ -78,22 +80,32 @@ program
   .option('--all', 'clear all generated files')
   .option('--cache', 'clear cache')
   .option('--output', 'clear output')
+  .option('--dll', 'clear dll')
   .action((options) => {
     const all = Object.keys(options).length === 0 || options.all;
 
     if (all || options.cache) {
-      console.log('Clearing cache...');
+      const spinner = ora('clearing old cache files...').start();
       fs.rmSync(cacheDirectory, { force: true, recursive: true });
-      console.log('Cache cleared!');
+      spinner.succeed('old cache files cleared!');
     }
 
     if (all || options.output) {
-      console.log('Clearing output...');
-      fs.rmSync(outputDirectory, {
+      const spinner = ora('clearing old output files...').start();
+      fs.rmSync(projectOutputDirectory, {
         force: true,
         recursive: true,
       });
-      console.log('Output cleared!');
+      spinner.succeed('old output files cleared !');
+    }
+
+    if (all || options.dll) {
+      const spinner = ora('clearing old dll files...').start();
+      fs.rmSync(dllDirectory, {
+        force: true,
+        recursive: true,
+      });
+      spinner.succeed('old dll files cleared!');
     }
   });
 
