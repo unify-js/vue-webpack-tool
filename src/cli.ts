@@ -2,12 +2,12 @@
 
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
-import { Command } from 'commander';
+import { Command, Option } from 'commander';
 import fs from 'node:fs';
 import { merge } from 'webpack-merge';
 import ora from 'ora';
 
-import { cacheDirectory, projectOutputDirectory, projectPackageJson, dllDirectory } from './utils/index.js';
+import { cacheDirectory, projectOutputDirectory, projectPackageJson, dllDirectory, clearDir } from './utils/index.js';
 import createWebpackDevConfig from './configs/webpack.dev.js';
 import createWebpackProdConfig from './configs/webpack.prod.js';
 import createWebpackDllConfig from './configs/webpack.dll.js';
@@ -66,19 +66,29 @@ program
 
 program
   .command('dll')
-  .description('generate DLL file')
-  .option('--prod', 'generate production mode DLL file')
+  .description('manage DLL file')
+  .addOption(
+    new Option(
+      '-g, --generate <type>',
+      'generate DLL files. Pass "dev" to generate DLL files for development, pass "prod" to generate DLL files for production.'
+    ).choices(['dev', 'prod'])
+  )
+  .option('-c, --clear', 'clear the generated DLL files')
   .action((options) => {
-    const spinner = ora('clearing old DLL files...').start();
-    fs.rmSync(dllDirectory, { force: true, recursive: true });
-    spinner.succeed('old dll files!');
+    if (options.generate) {
+      webpack(
+        merge(createWebpackDllConfig(), {
+          mode: options.generate === 'prod' ? 'production' : 'development',
+        }),
+        displayInfo
+      );
+    }
 
-    webpack(
-      merge(createWebpackDllConfig(), {
-        mode: options.prod ? 'production' : 'development',
-      }),
-      displayInfo
-    );
+    if (options.clear) {
+      const spinner = ora('clearing old DLL files...').start();
+      fs.rmSync(dllDirectory, { force: true, recursive: true });
+      spinner.succeed('old dll files cleared!');
+    }
   });
 
 program

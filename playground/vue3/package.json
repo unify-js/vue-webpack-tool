@@ -6,9 +6,9 @@
   "scripts": {
     "postinstall": "vue-webpack-tool clear",
     "dev": "vue-webpack-tool dev",
-    "dev:dll": "vue-webpack-tool dll --dev",
+    "dev:dll": "vue-webpack-tool dll",
     "build": "vue-webpack-tool build",
-    "build:dll": "vue-webpack-tool dll"
+    "build:dll": "vue-webpack-tool dll --prod"
   },
   "keywords": [],
   "author": "",
