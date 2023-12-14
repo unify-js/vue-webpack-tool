@@ -1,5 +1,6 @@
 import path from 'node:path';
 import fs from 'node:fs';
+import ora from 'ora';
 
 const contextDirectory = process.cwd();
 
@@ -14,3 +15,11 @@ export const projectPackageJson = JSON.parse(fs.readFileSync(path.resolve(proces
   version: string;
   dependencies: Record<string, string>;
 };
+
+export function clearDir(options: { dir: string; startMessage: string; successMessage: string }) {
+  const { dir, startMessage, successMessage } = options;
+
+  const spinner = ora(startMessage).start();
+  fs.rmSync(dir, { force: true, recursive: true });
+  spinner.succeed(successMessage);
+}
