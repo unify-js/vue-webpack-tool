@@ -1,5 +1,11 @@
 # @unify-js/vue-webpack-tool
 
+## 0.4.0
+
+### Minor Changes
+
+- 3a2fd96: utilize 'HtmlInjectDllPlugin' to copy all dll files to the output folder
+
 ## 0.3.0
 
 ### Minor Changes
