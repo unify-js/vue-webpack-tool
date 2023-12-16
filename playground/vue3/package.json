@@ -5,10 +5,10 @@
   "description": "",
   "scripts": {
     "postinstall": "vue-webpack-tool clear",
-    "dev": "vue-webpack-tool dev",
-    "dev:dll": "vue-webpack-tool dll",
+    "start": "vue-webpack-tool start",
+    "dll:dev": "vue-webpack-tool dll dev",
     "build": "vue-webpack-tool build",
-    "build:dll": "vue-webpack-tool dll --prod"
+    "dll:build": "vue-webpack-tool dll prod"
   },
   "keywords": [],
   "author": "",
