@@ -4,10 +4,13 @@ import webpack from 'webpack';
 import fs from 'node:fs';
 
 import loaderConfig from './loader-configs/index.js';
-import { projectOutputDirectory, dllManifestPath, dllDirectory } from '../utils/index.js';
 import { HtmlInjectDllPlugin } from './plugins/index.js';
 
-export default function createWebpackCommonConfig(): webpack.Configuration {
+export default function createWebpackCommonConfig(options: {
+  outputDir: string;
+  dllManifestPath: string;
+  dllDirectory: string;
+}): webpack.Configuration {
   const plugins: webpack.Configuration['plugins'] = [
     new webpack.ProgressPlugin(),
     new webpack.DefinePlugin({
@@ -20,18 +23,18 @@ export default function createWebpackCommonConfig(): webpack.Configuration {
     new VueLoaderPlugin(),
   ];
 
-  if (fs.existsSync(dllManifestPath)) {
+  if (fs.existsSync(options.dllManifestPath)) {
     plugins.push(
       new webpack.DllReferencePlugin({
-        manifest: JSON.parse(fs.readFileSync(dllManifestPath, 'utf-8')),
+        manifest: JSON.parse(fs.readFileSync(options.dllManifestPath, 'utf-8')),
         context: process.cwd(),
       })
     );
 
     plugins.push(
       new HtmlInjectDllPlugin({
-        projectOutputDirectory,
-        dllDirectory,
+        projectOutputDirectory: options.outputDir,
+        dllDirectory: options.dllDirectory,
         dllFileNamePrefix: 'vendor_dll_',
       })
     );
@@ -42,7 +45,7 @@ export default function createWebpackCommonConfig(): webpack.Configuration {
 
     output: {
       filename: '[name].[contenthash].js',
-      path: projectOutputDirectory,
+      path: options.outputDir,
       clean: true,
     },
 

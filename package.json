@@ -3,7 +3,6 @@
   "version": "0.4.0",
   "description": "A webpack-based build tool for Vue development that focuses on the build performance.",
   "type": "module",
-  "main": "./bin/cli.js",
   "scripts": {
     "dev": "rm -f .tsbuildinfo && rm -rf bin && tsc && chmod +x ./bin/cli.js && tsc --watch",
     "build": "tsc && chmod +x ./bin/cli.js",

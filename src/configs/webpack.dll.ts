@@ -1,8 +1,10 @@
 import webpack from 'webpack';
 
-import { dllDirectory, dllManifestPath, projectPackageJson } from '../utils/index.js';
-
-export default function createWebpackDllConfig(): webpack.Configuration {
+export default function createWebpackDllConfig(options: {
+  dependencies: string[];
+  dllDirectory: string;
+  dllManifestPath: string;
+}): webpack.Configuration {
   const dllname = 'vendor_[fullhash]';
 
   return {
@@ -10,11 +12,11 @@ export default function createWebpackDllConfig(): webpack.Configuration {
       extensions: ['.js', '.jsx'],
     },
     entry: {
-      vendor: Object.keys(projectPackageJson.dependencies),
+      vendor: options.dependencies,
     },
     output: {
       filename: 'vendor_dll_[fullhash].js',
-      path: dllDirectory,
+      path: options.dllDirectory,
       library: dllname,
     },
     plugins: [
@@ -24,7 +26,7 @@ export default function createWebpackDllConfig(): webpack.Configuration {
       }),
       new webpack.DllPlugin({
         name: dllname,
-        path: dllManifestPath,
+        path: options.dllManifestPath,
         entryOnly: true,
         format: true,
       }),

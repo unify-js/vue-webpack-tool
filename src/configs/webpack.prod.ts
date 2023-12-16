@@ -1,11 +1,7 @@
-import { merge } from 'webpack-merge';
+import type webpack from 'webpack';
 
-import createWebpackCommonConfig from './webpack.common.js';
-
-export default function createWebpackProdConfig() {
-  const common = createWebpackCommonConfig();
-
-  return merge(common, {
+export default function createWebpackProdConfig(): webpack.Configuration {
+  return {
     mode: 'production',
-  });
+  };
 }
