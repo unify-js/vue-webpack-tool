@@ -1,5 +1,11 @@
 # @unify-js/vue-webpack-tool
 
+## 0.5.0
+
+### Minor Changes
+
+- e42ddfa: The user can customize the webpack config using the vue-webpack-tool.config.js file
+
 ## 0.4.0
 
 ### Minor Changes
