@@ -1,7 +1,7 @@
 {
   "name": "@unify-js/vue-webpack-tool",
   "version": "0.5.0",
-  "description": "A webpack-based build tool for Vue development that focuses on the build performance.",
+  "description": "A build tool for Vue development based on webpack, specifically designed to enhance the development experience.",
   "type": "module",
   "scripts": {
     "dev": "rm -f .tsbuildinfo && rm -rf bin && tsc && chmod +x ./bin/cli.js && tsc --watch",
@@ -20,9 +20,21 @@
   "files": [
     "bin"
   ],
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "vue",
+    "webpack"
+  ],
+  "author": "luohuidong",
+  "license": "MIT",
+  "homepage": "https://vue-webpack-tool.unifylabs.top",
+  "bugs": {
+    "url": "https://github.com/unify-js/vue-webpack-tool/issues",
+    "email": "luohuidong01@126.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/unify-js/vue-webpack-tool.git"
+  },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
     "@types/node": "^20.10.4",
