@@ -31,14 +31,32 @@ export default class WebpackConfig {
     };
   }
 
-  private async getUserConfig(): Promise<UserConfig> {
-    let tempConfig: UserConfig = {};
+  private async getUserConfig(): Promise<webpack.Configuration> {
+    let webpackConfig: webpack.Configuration = {};
     const vueWebpackToolConfigPath = path.resolve(process.cwd(), 'vue-webpack-tool.config.mjs');
     if (fs.existsSync(vueWebpackToolConfigPath)) {
-      tempConfig = await import(vueWebpackToolConfigPath);
+      const userConfig = (await import(vueWebpackToolConfigPath)) as UserConfig;
+      const { publicPath, outputDir, devServer } = userConfig;
+
+      const tmpWebpackConfig: webpack.Configuration = {};
+      if (publicPath) {
+        tmpWebpackConfig.output = {
+          publicPath: userConfig.publicPath,
+        };
+      }
+      if (outputDir) {
+        tmpWebpackConfig.output = {
+          path: outputDir,
+        };
+      }
+      if (devServer) {
+        tmpWebpackConfig.devServer = devServer;
+      }
+
+      webpackConfig = merge(userConfig.configureWebpack || {}, tmpWebpackConfig);
     }
 
-    return tempConfig;
+    return webpackConfig;
   }
 
   async getWebpackDevConfig(): Promise<webpack.Configuration> {
@@ -54,7 +72,7 @@ export default class WebpackConfig {
         outputDir: this.outputDir,
         cacheDirectory: this.cacheDirectory,
       }),
-      useConfig.configureWebpack || {}
+      useConfig
     );
   }
 
@@ -68,7 +86,7 @@ export default class WebpackConfig {
         dllDirectory: this.dllDirectory,
       }),
       webpackProdConfig(),
-      useConfig.configureWebpack || {}
+      useConfig
     );
   }
 
