@@ -3,22 +3,22 @@
 layout: home
 
 hero:
-  name: "Vue Webpack Tool"
-  text: "A Tool for Vue Development"
-  tagline: A webpack-based build tool for Vue development that focuses on the build performance.
+  name: 'Vue Webpack Tool'
+  text: 'A Tool for Vue Development'
+  tagline: A build tool for Vue development based on webpack, specifically designed to enhance the development experience.
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: Get Started
+      link: /getting-started
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: APIs
+      link: /apis
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: Based on Webpack
+    details: Built on top of Webpack, with sensible defaults
+  - title: Better development experience
+    details: Designed to enhance the development experience
+  - title: Configurable
+    details: Configurable via in-project config file
 ---
