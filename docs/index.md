@@ -9,16 +9,21 @@ hero:
   actions:
     - theme: brand
       text: Get Started
-      link: /getting-started
+      link: /guide/getting-started
     - theme: alt
-      text: APIs
-      link: /apis
-
+      text: Cli
+      link: /guide/cli
+    - theme: alt
+      text: Config
+      link: /guide/config
 features:
-  - title: Based on Webpack
+  - icon: 📦
+    title: Based on Webpack
     details: Built on top of Webpack, with sensible defaults
-  - title: Better development experience
+  - icon: ⚡️
+    title: Better development experience
     details: Designed to enhance the development experience
-  - title: Configurable
+  - icon: 🛠️
+    title: Configurable
     details: Configurable via in-project config file
 ---

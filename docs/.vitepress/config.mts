@@ -6,16 +6,16 @@ export default defineConfig({
   description: 'A webpack-based build tool for Vue development that focuses on the build performance.',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    nav: [{ text: 'Guides', link: '/why-vue-webpack-tool' }],
+    nav: [{ text: 'Guides', link: '/why-vue-webpack-tool', activeMatch: '/guide/' }],
 
     sidebar: [
       {
         text: 'Guides',
         items: [
-          { text: 'Why Vue Webpack Tool', link: '/why-vue-webpack-tool' },
-          { text: 'Getting Started', link: '/getting-started' },
-          { text: 'CLI', link: '/cli' },
-          { text: 'Config', link: '/config' },
+          { text: 'Why Vue Webpack Tool', link: '/guide/why-vue-webpack-tool' },
+          { text: 'Getting Started', link: '/guide/getting-started' },
+          { text: 'CLI', link: '/guide/cli' },
+          { text: 'Config', link: '/guide/config' },
         ],
       },
     ],
