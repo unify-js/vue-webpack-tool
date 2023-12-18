@@ -59,7 +59,7 @@ export default class WebpackConfig {
     return webpackConfig;
   }
 
-  async getWebpackDevConfig(): Promise<webpack.Configuration> {
+  async getWebpackDevConfig(options?: { dll?: boolean }): Promise<webpack.Configuration> {
     const useConfig = await this.getUserConfig();
 
     return merge(
@@ -67,6 +67,7 @@ export default class WebpackConfig {
         outputDir: this.outputDir,
         dllManifestPath: this.dllManifestPath,
         dllDirectory: this.dllDirectory,
+        dll: options?.dll,
       }),
       webpackDevConfig({
         outputDir: this.outputDir,
@@ -76,7 +77,7 @@ export default class WebpackConfig {
     );
   }
 
-  async getWebpackProdConfig(): Promise<webpack.Configuration> {
+  async getWebpackProdConfig(options?: { dll?: boolean }): Promise<webpack.Configuration> {
     const useConfig = await this.getUserConfig();
 
     return merge(
@@ -84,6 +85,7 @@ export default class WebpackConfig {
         outputDir: this.outputDir,
         dllManifestPath: this.dllManifestPath,
         dllDirectory: this.dllDirectory,
+        dll: options?.dll,
       }),
       webpackProdConfig(),
       useConfig

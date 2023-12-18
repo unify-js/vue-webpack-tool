@@ -39,7 +39,9 @@ export default class HtmlInjectDllPlugin {
     }
 
     for (const dllFile of dllFiles) {
-      fs.copyFileSync(path.resolve(this.dllDirectory, dllFile), path.resolve(this.projectOutputDirectory, dllFile));
+      const src = path.resolve(this.dllDirectory, dllFile);
+      const dest = path.resolve(this.projectOutputDirectory, dllFile);
+      fs.copyFileSync(src, dest);
     }
   }
 

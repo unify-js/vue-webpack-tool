@@ -10,6 +10,7 @@ export default function createWebpackCommonConfig(options: {
   outputDir: string;
   dllManifestPath: string;
   dllDirectory: string;
+  dll?: boolean;
 }): webpack.Configuration {
   const plugins: webpack.Configuration['plugins'] = [
     new webpack.ProgressPlugin(),
@@ -23,7 +24,7 @@ export default function createWebpackCommonConfig(options: {
     new VueLoaderPlugin(),
   ];
 
-  if (fs.existsSync(options.dllManifestPath)) {
+  if (options.dll && fs.existsSync(options.dllManifestPath)) {
     plugins.push(
       new webpack.DllReferencePlugin({
         manifest: JSON.parse(fs.readFileSync(options.dllManifestPath, 'utf-8')),
