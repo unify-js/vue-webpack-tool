@@ -36,22 +36,10 @@ function clearDir(options: { dir: string; startMessage: string; endMessage: stri
   spinner.succeed(endMessage);
 }
 
+export function clearOldFiles(tempDirectory: string) {
+  clearDir({ dir: tempDirectory, startMessage: 'clearing old files...', endMessage: 'old files cleared!' });
+}
+
 export function clearDllFiles(dllDirectory: string) {
   clearDir({ dir: dllDirectory, startMessage: 'clearing old DLL files...', endMessage: 'old dll files cleared!' });
-}
-
-export function clearCacheFiles(cacheDirectory: string) {
-  clearDir({
-    dir: cacheDirectory,
-    startMessage: 'clearing old cache files...',
-    endMessage: 'old cache files cleared!',
-  });
-}
-
-export function clearOutputFiles(projectOutputDirectory: string) {
-  clearDir({
-    dir: projectOutputDirectory,
-    startMessage: 'clearing old output files...',
-    endMessage: 'old output files cleared!',
-  });
 }

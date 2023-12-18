@@ -6,7 +6,7 @@ import { Command, Argument } from 'commander';
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { displayInfo, clearDllFiles, clearCacheFiles, clearOutputFiles } from './utils/index.js';
+import { displayInfo, clearOldFiles, clearDllFiles } from './utils/index.js';
 import WebpackConfig from './utils/WebpackConfig.js';
 
 const webpackConfig = new WebpackConfig();
@@ -25,8 +25,11 @@ program
 program
   .command('start')
   .description('start dev server')
-  .action(async () => {
-    const webpackDevConfig = await webpackConfig.getWebpackDevConfig();
+  .option('--dll', 'use dll')
+  .action(async (options) => {
+    const webpackDevConfig = await webpackConfig.getWebpackDevConfig({
+      dll: options.dll,
+    });
     const compiler = webpack(webpackDevConfig);
     const server = new WebpackDevServer(webpackDevConfig.devServer, compiler);
     const runServer = async () => {
@@ -38,8 +41,11 @@ program
 program
   .command('build')
   .description('build for production')
-  .action(async () => {
-    const webpackProdConfig = await webpackConfig.getWebpackProdConfig();
+  .option('--dll', 'use dll')
+  .action(async (options) => {
+    const webpackProdConfig = await webpackConfig.getWebpackProdConfig({
+      dll: options.dll,
+    });
     webpack(webpackProdConfig, displayInfo);
   });
 
@@ -55,14 +61,8 @@ program
 program
   .command('clear')
   .description('clear all generate file')
-  .option('--cache', 'only clear cache files')
-  .option('--output', 'only clear output files')
-  .option('--dll', 'only clear dll files')
-  .action((options) => {
-    const all = Object.keys(options).length === 0;
-    if (all || options.cache) clearCacheFiles(webpackConfig.cacheDirectory);
-    if (all || options.output) clearOutputFiles(webpackConfig.outputDir);
-    if (all || options.dll) clearDllFiles(webpackConfig.dllDirectory);
+  .action(() => {
+    clearOldFiles(webpackConfig.tempDirectory);
   });
 
 program.parse();
