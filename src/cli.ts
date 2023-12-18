@@ -53,11 +53,15 @@ program
 
 program
   .command('dll')
-  .description('generate DLL file')
-  .addArgument(new Argument('<mode>', 'generate DLL files for development or production').choices(['dev', 'prod']))
-  .action((arg) => {
+  .description('Generate DLL file')
+  .option('--dev', 'generate DLL file for development. (default option)')
+  .option('--prod', 'generate DLL file for production')
+  .action((options) => {
+    let mode: 'dev' | 'prod' = 'dev';
+    if (options.prod) mode = 'prod';
+
     clearDllFiles(webpackConfig.dllDirectory);
-    webpack(webpackConfig.getWebpackDllConfig({ mode: arg.mode }), displayInfo);
+    webpack(webpackConfig.getWebpackDllConfig({ mode }), displayInfo);
   });
 
 program
