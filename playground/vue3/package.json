@@ -6,9 +6,12 @@
   "scripts": {
     "postinstall": "vue-webpack-tool clear",
     "start": "vue-webpack-tool start",
-    "dll:dev": "vue-webpack-tool dll dev",
+    "start-use-dll": "vue-webpack-tool start --dll",
+    "start-use-lazy": "vue-webpack-tool start --lazy",
+    "dev-dll-generate": "vue-webpack-tool dll --dev",
     "build": "vue-webpack-tool build",
-    "dll:build": "vue-webpack-tool dll prod"
+    "build-use-dll": "vue-webpack-tool build --dll",
+    "build-dll-generate": "vue-webpack-tool dll --prod"
   },
   "keywords": [],
   "author": "",
