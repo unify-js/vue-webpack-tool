@@ -4,8 +4,8 @@ layout: home
 
 hero:
   name: 'Vue Webpack Tool'
-  text: 'A Tool for Vue Development'
-  tagline: A build tool for Vue development based on webpack, specifically designed to enhance the development experience.
+  text: 'A Build Tool for Vue Development'
+  tagline: Based on webpack, specifically designed to enhance the development experience.
   actions:
     - theme: brand
       text: Get Started
