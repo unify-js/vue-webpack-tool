@@ -26,9 +26,11 @@ program
   .command('start')
   .description('start dev server')
   .option('--dll', 'use dll')
+  .option('--lazy', 'use lazy compilation')
   .action(async (options) => {
     const webpackDevConfig = await webpackConfig.getWebpackDevConfig({
       dll: options.dll,
+      lazy: options.lazy,
     });
     const compiler = webpack(webpackDevConfig);
     const server = new WebpackDevServer(webpackDevConfig.devServer, compiler);
