@@ -59,7 +59,7 @@ export default class WebpackConfig {
     return webpackConfig;
   }
 
-  async getWebpackDevConfig(options?: { dll?: boolean }): Promise<webpack.Configuration> {
+  async getWebpackDevConfig(options?: { dll?: boolean; lazy?: boolean }): Promise<webpack.Configuration> {
     const useConfig = await this.getUserConfig();
 
     return merge(
@@ -72,6 +72,7 @@ export default class WebpackConfig {
       webpackDevConfig({
         outputDir: this.outputDir,
         cacheDirectory: this.cacheDirectory,
+        lazy: options?.lazy,
       }),
       useConfig
     );
