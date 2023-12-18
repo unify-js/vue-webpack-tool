@@ -18,7 +18,7 @@ const packageJson = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'pack
 
 const program = new Command();
 program
-  .name('Vue Webpack Tool')
+  .name('vue-webpack-tool')
   .description('A webpack-based build tool for Vue development that focuses on the build performance.')
   .version(packageJson.version);
 
@@ -66,7 +66,7 @@ program
 
 program
   .command('clear')
-  .description('clear all generate file')
+  .description('clear all generated files')
   .action(() => {
     clearOldFiles(webpackConfig.tempDirectory);
   });
