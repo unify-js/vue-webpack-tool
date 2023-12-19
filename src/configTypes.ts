@@ -1,6 +1,6 @@
 import type webpack from 'webpack';
 
-export interface UserConfig {
+export interface ProjectConfig {
   publicPath?: string;
   outputDir?: string;
   devServer?: webpack.Configuration['devServer'];
