@@ -15,7 +15,7 @@ export default defineConfig({
           { text: 'Why Vue Webpack Tool', link: '/guide/why-vue-webpack-tool' },
           { text: 'Getting Started', link: '/guide/getting-started' },
           { text: 'CLI', link: '/guide/cli' },
-          { text: 'Config', link: '/guide/config' },
+          { text: 'Config', link: '/guide/configuration' },
         ],
       },
     ],
