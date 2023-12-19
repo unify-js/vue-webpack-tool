@@ -29,6 +29,15 @@ export default function createWebpackDevConfig(options: {
         type: 'filesystem',
         cacheDirectory: options.cacheDirectory,
       },
+
+      // https://webpack.js.org/guides/build-performance/#minimal-entry-chunk
+      // https://webpack.js.org/guides/build-performance/#avoid-extra-optimization-steps
+      optimization: {
+        runtimeChunk: 'single',
+        removeAvailableModules: false,
+        removeEmptyChunks: false,
+        splitChunks: false,
+      },
     },
     tmpConfig
   );
