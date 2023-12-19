@@ -10,10 +10,10 @@ vue-webpack-tool start [options]
 
 ### Options
 
-| Options | Description          |
-| ------- | -------------------- |
-| --dll   | Use the dll file     |
-| --lazy  | use lazy compilation |
+| Options | Description                                                   |
+| ------- | ------------------------------------------------------------- |
+| --dll   | Use the dll file. You must be already generated dev DLL files |
+| --lazy  | use lazy compilation                                          |
 
 ## Build for production
 
@@ -25,9 +25,9 @@ vue-webpack-tool build [options]
 
 ### Options
 
-| Options | Description      |
-| ------- | ---------------- |
-| --dll   | Use the dll file |
+| Options | Description                                                    |
+| ------- | -------------------------------------------------------------- |
+| --dll   | Use the dll file. You must be already generated prod DLL files |
 
 ## Generate DLL files
 
