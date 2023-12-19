@@ -50,9 +50,13 @@ export default class HtmlInjectDllPlugin {
       HtmlWebpackPlugin.getHooks(compilation).beforeAssetTagGeneration.tapAsync(pluginName, (data, cb) => {
         const dllfiles = this.getDllFiles();
         data.assets.js.unshift(...dllfiles);
-        this.copyFile(dllfiles);
         cb(null, data);
       });
+    });
+
+    compiler.hooks.afterEmit.tap(pluginName, () => {
+      const dllfiles = this.getDllFiles();
+      this.copyFile(dllfiles);
     });
   }
 }
