@@ -1,5 +1,17 @@
 # @unify-js/vue-webpack-tool
 
+## 0.6.0
+
+### Minor Changes
+
+- e5a6003: Users can quickly configure webpack using publicPath, outputDir, and devServer options.
+- 717ba36: enable lazy compilation by passing the "--lazy" option when using the "start" command
+- f5dc6e3: enable DLL by passing the "--dll" argument
+
+### Patch Changes
+
+- 5587536: modify the options for the "dll" command
+
 ## 0.5.0
 
 ### Minor Changes
