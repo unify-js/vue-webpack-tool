@@ -35,7 +35,9 @@ export default class WebpackConfig {
     let webpackConfig: webpack.Configuration = {};
     const vueWebpackToolConfigPath = path.resolve(process.cwd(), 'vue-webpack-tool.config.mjs');
     if (fs.existsSync(vueWebpackToolConfigPath)) {
-      const userConfig = (await import(vueWebpackToolConfigPath)) as ProjectConfig;
+      const { default: userConfig } = (await import(vueWebpackToolConfigPath)) as {
+        default: ProjectConfig;
+      };
       const { publicPath, outputDir, devServer } = userConfig;
 
       const tmpWebpackConfig: webpack.Configuration = {};
