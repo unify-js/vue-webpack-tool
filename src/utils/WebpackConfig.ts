@@ -7,24 +7,19 @@ import type { ProjectConfig } from '../configTypes.js';
 import { webpackCommonConfig, webpackDevConfig, webpackProdConfig, webpackDllConfig } from '../configs/index.js';
 
 export default class WebpackConfig {
-  outputDir: string;
-  tempDirectory: string;
-  cacheDirectory: string;
-  dllDirectory: string;
-  dllManifestPath: string;
+  contextDirectory = process.cwd();
+  outputDir = path.resolve(this.contextDirectory, 'dist');
+  tempDirectory = path.resolve(this.contextDirectory, '.temp');
+  cacheDirectory = path.resolve(this.tempDirectory, '.temp_cache');
+  dllDirectory = path.resolve(this.tempDirectory, '.dll');
+  dllManifestPath = path.resolve(this.dllDirectory, 'vendor-manifest.json');
+  publicPath = '/';
   projectPackageJson: {
     version: string;
     dependencies: Record<string, string>;
   };
 
   constructor() {
-    const contextDirectory = process.cwd();
-    this.outputDir = path.resolve(contextDirectory, 'dist');
-    this.tempDirectory = path.resolve(contextDirectory, '.temp');
-    this.cacheDirectory = path.resolve(this.tempDirectory, '.temp_cache');
-    this.dllDirectory = path.resolve(this.tempDirectory, '.dll');
-    this.dllManifestPath = path.resolve(this.dllDirectory, 'vendor-manifest.json');
-
     this.projectPackageJson = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'package.json'), 'utf-8')) as {
       version: string;
       dependencies: Record<string, string>;
@@ -42,11 +37,13 @@ export default class WebpackConfig {
 
       const tmpWebpackConfig: webpack.Configuration = {};
       if (publicPath) {
+        this.publicPath = publicPath;
         tmpWebpackConfig.output = {
           publicPath: userConfig.publicPath,
         };
       }
       if (outputDir) {
+        this.outputDir = outputDir;
         tmpWebpackConfig.output = {
           path: outputDir,
         };
@@ -70,11 +67,13 @@ export default class WebpackConfig {
         dllManifestPath: this.dllManifestPath,
         dllDirectory: this.dllDirectory,
         dll: options?.dll,
+        publicPath: this.publicPath,
       }),
       webpackDevConfig({
         outputDir: this.outputDir,
         cacheDirectory: this.cacheDirectory,
         lazy: options?.lazy,
+        publicPath: this.publicPath,
       }),
       useConfig
     );
@@ -89,6 +88,7 @@ export default class WebpackConfig {
         dllManifestPath: this.dllManifestPath,
         dllDirectory: this.dllDirectory,
         dll: options?.dll,
+        publicPath: this.publicPath,
       }),
       webpackProdConfig(),
       useConfig

@@ -11,6 +11,7 @@ export default function createWebpackCommonConfig(options: {
   dllManifestPath: string;
   dllDirectory: string;
   dll?: boolean;
+  publicPath: string;
 }): webpack.Configuration {
   const plugins: webpack.Configuration['plugins'] = [
     new webpack.ProgressPlugin(),
@@ -37,6 +38,7 @@ export default function createWebpackCommonConfig(options: {
         projectOutputDirectory: options.outputDir,
         dllDirectory: options.dllDirectory,
         dllFileNamePrefix: 'vendor_dll_',
+        publicPath: options.publicPath,
       })
     );
   }

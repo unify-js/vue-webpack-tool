@@ -9,6 +9,7 @@ interface Options {
   projectOutputDirectory: string;
   dllDirectory: string;
   dllFileNamePrefix: string;
+  publicPath: string;
 }
 
 /** Copy the DLL file to the output folder and add the script tag to the HTML file. */
@@ -16,11 +17,13 @@ export default class HtmlInjectDllPlugin {
   projectOutputDirectory: string;
   dllDirectory: string;
   dllFileNamePrefix: string;
+  publicPath: string;
 
   constructor(options: Options) {
     this.projectOutputDirectory = options.projectOutputDirectory;
     this.dllDirectory = options.dllDirectory;
     this.dllFileNamePrefix = options.dllFileNamePrefix;
+    this.publicPath = options.publicPath;
   }
 
   getDllFiles() {
@@ -48,7 +51,7 @@ export default class HtmlInjectDllPlugin {
   apply(compiler: webpack.Compiler) {
     compiler.hooks.compilation.tap(pluginName, (compilation) => {
       HtmlWebpackPlugin.getHooks(compilation).beforeAssetTagGeneration.tapAsync(pluginName, (data, cb) => {
-        const dllfiles = this.getDllFiles();
+        const dllfiles = this.getDllFiles().map((item) => `${this.publicPath}${item}`);
         data.assets.js.unshift(...dllfiles);
         cb(null, data);
       });

@@ -6,6 +6,7 @@ export default function createWebpackDevConfig(options: {
   outputDir: string;
   cacheDirectory: string;
   lazy?: boolean;
+  publicPath: string;
 }): webpack.Configuration {
   const tmpConfig: webpack.Configuration = {};
 
@@ -20,9 +21,14 @@ export default function createWebpackDevConfig(options: {
       mode: 'development',
       devtool: 'eval-source-map',
       devServer: {
-        static: options.outputDir,
+        static: {
+          directory: options.outputDir,
+          publicPath: options.publicPath,
+        },
         // https://webpack.js.org/configuration/dev-server/#devserverhistoryapifallback
-        historyApiFallback: true,
+        historyApiFallback: {
+          rewrites: [{ from: /./, to: `${options.publicPath}index.html` }],
+        },
       },
 
       cache: {
