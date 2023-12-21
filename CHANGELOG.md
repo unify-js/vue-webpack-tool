@@ -1,5 +1,12 @@
 # @unify-js/vue-webpack-tool
 
+## 0.6.1
+
+### Patch Changes
+
+- 52cc836: Fix the issue of being unable to read the user configuration file
+- 91428f0: modify the optimization config to improve build performance
+
 ## 0.6.0
 
 ### Minor Changes
