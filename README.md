@@ -1,6 +1,6 @@
 # @unify-js/vue-webpack-tool
 
-A webpack-based build tool for Vue development that focuses on the build performance.
+A build tool for Vue development based on webpack, specifically designed to enhance the development experience.
 
 ## Motivation
 
