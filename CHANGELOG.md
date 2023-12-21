@@ -1,5 +1,11 @@
 # @unify-js/vue-webpack-tool
 
+## 0.7.0
+
+### Minor Changes
+
+- ffe3f42: support configuring public path
+
 ## 0.6.1
 
 ### Patch Changes
