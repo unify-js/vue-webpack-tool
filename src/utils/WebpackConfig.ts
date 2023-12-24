@@ -18,6 +18,7 @@ export default class WebpackConfig {
     version: string;
     dependencies: Record<string, string>;
   };
+  assetsDir = '';
 
   constructor() {
     this.projectPackageJson = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'package.json'), 'utf-8')) as {
@@ -33,7 +34,7 @@ export default class WebpackConfig {
       const { default: userConfig } = (await import(vueWebpackToolConfigPath)) as {
         default: ProjectConfig;
       };
-      const { publicPath, outputDir, devServer } = userConfig;
+      const { publicPath, outputDir, devServer, assetsDir } = userConfig;
 
       const tmpWebpackConfig: webpack.Configuration = {};
       if (publicPath) {
@@ -48,9 +49,8 @@ export default class WebpackConfig {
           path: outputDir,
         };
       }
-      if (devServer) {
-        tmpWebpackConfig.devServer = devServer;
-      }
+      if (devServer) tmpWebpackConfig.devServer = devServer;
+      if (assetsDir) this.assetsDir = assetsDir;
 
       webpackConfig = merge(userConfig.configureWebpack || {}, tmpWebpackConfig);
     }
@@ -58,7 +58,11 @@ export default class WebpackConfig {
     return webpackConfig;
   }
 
-  async getWebpackDevConfig(options?: { dll?: boolean; lazy?: boolean }): Promise<webpack.Configuration> {
+  async getWebpackDevConfig(options?: {
+    dll?: boolean;
+    lazy?: boolean;
+    assetsDir?: string;
+  }): Promise<webpack.Configuration> {
     const useConfig = await this.getUserConfig();
 
     return merge(
@@ -68,6 +72,8 @@ export default class WebpackConfig {
         dllDirectory: this.dllDirectory,
         dll: options?.dll,
         publicPath: this.publicPath,
+        isProduction: false,
+        assetsDir: this.assetsDir,
       }),
       webpackDevConfig({
         outputDir: this.outputDir,
@@ -79,7 +85,7 @@ export default class WebpackConfig {
     );
   }
 
-  async getWebpackProdConfig(options?: { dll?: boolean }): Promise<webpack.Configuration> {
+  async getWebpackProdConfig(options?: { dll?: boolean; assetsDir?: string }): Promise<webpack.Configuration> {
     const useConfig = await this.getUserConfig();
 
     return merge(
@@ -89,8 +95,10 @@ export default class WebpackConfig {
         dllDirectory: this.dllDirectory,
         dll: options?.dll,
         publicPath: this.publicPath,
+        isProduction: true,
+        assetsDir: this.assetsDir,
       }),
-      webpackProdConfig(),
+      webpackProdConfig({ assetsDir: this.assetsDir }),
       useConfig
     );
   }

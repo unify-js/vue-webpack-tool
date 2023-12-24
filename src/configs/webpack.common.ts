@@ -2,6 +2,7 @@ import HTMLWebpackPlugin from 'html-webpack-plugin';
 import { VueLoaderPlugin } from 'vue-loader';
 import webpack from 'webpack';
 import fs from 'node:fs';
+import path from 'node:path';
 
 import loaderConfig from './loader-configs/index.js';
 import { HtmlInjectDllPlugin } from './plugins/index.js';
@@ -12,6 +13,8 @@ export default function createWebpackCommonConfig(options: {
   dllDirectory: string;
   dll?: boolean;
   publicPath: string;
+  assetsDir: string;
+  isProduction: boolean;
 }): webpack.Configuration {
   const plugins: webpack.Configuration['plugins'] = [
     new webpack.ProgressPlugin(),
@@ -47,7 +50,7 @@ export default function createWebpackCommonConfig(options: {
     entry: './src/main',
 
     output: {
-      filename: '[name].[contenthash].js',
+      filename: path.join(options.assetsDir, 'js/[name].[contenthash].js'),
       path: options.outputDir,
       clean: true,
     },
@@ -65,7 +68,7 @@ export default function createWebpackCommonConfig(options: {
           test: /\.vue$/,
           use: 'vue-loader',
         },
-        ...loaderConfig,
+        ...loaderConfig({ assetsDir: options.assetsDir, isProduction: options.isProduction }),
       ],
     },
   };
