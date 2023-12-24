@@ -21,6 +21,7 @@
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
-    "@unify-js/vue-webpack-tool": "file:../.."
+    "@unify-js/vue-webpack-tool": "file:../..",
+    "sass": "^1.69.5"
   }
 }
