@@ -1,5 +1,11 @@
 # @unify-js/vue-webpack-tool
 
+## 0.8.0
+
+### Minor Changes
+
+- 62d7ce4: support configuring asset dir
+
 ## 0.7.0
 
 ### Minor Changes
