@@ -15,7 +15,7 @@ hero:
       link: /guide/cli
     - theme: alt
       text: Config
-      link: /guide/config
+      link: /guide/configuration
 features:
   - icon: 📦
     title: Based on Webpack

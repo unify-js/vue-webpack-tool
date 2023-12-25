@@ -5,6 +5,10 @@ export default defineConfig({
   title: 'Vue Webpack Tool',
   description: 'A webpack-based build tool for Vue development that focuses on the build performance.',
   themeConfig: {
+    search: {
+      provider: 'local',
+    },
+
     // https://vitepress.dev/reference/default-theme-config
     nav: [{ text: 'Guides', link: '/why-vue-webpack-tool', activeMatch: '/guide/' }],
 
