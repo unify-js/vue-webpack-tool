@@ -60,6 +60,9 @@ export default function createWebpackCommonConfig(options: {
     resolve: {
       // https://webpack.js.org/configuration/dev-server/#devserverhistoryapifallback
       extensions: ['.ts', '.js', '.tsx', '.json', '.wasm'],
+      alias: {
+        '@': path.resolve(process.cwd(), 'src/'),
+      },
     },
 
     plugins,
