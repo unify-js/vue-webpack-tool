@@ -3,6 +3,33 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import type { Options } from './types.js';
 
 export default function styleLoaderConfig(options: Options) {
+  const cssLoaderConfig = {
+    loader: 'css-loader',
+    options: Object.assign({}, options.css?.loaderOptions?.css),
+  };
+
+  const cssModuleLoaderConfig = {
+    loader: 'css-loader',
+    options: Object.assign(
+      {
+        modules: {
+          localIdentName: '[local]_[hash:base64]',
+        },
+      },
+      options.css?.loaderOptions?.css
+    ),
+  };
+
+  const lessLoaderConfigs = {
+    loader: 'less-loader',
+    options: Object.assign({}, options.css?.loaderOptions?.less),
+  };
+
+  const sassLoaderConfigs = {
+    loader: 'sass-loader',
+    options: Object.assign({}, options.css?.loaderOptions?.sass),
+  };
+
   return [
     {
       test: /\.css$/,
@@ -10,21 +37,11 @@ export default function styleLoaderConfig(options: Options) {
         // this matches `<style module>`
         {
           resourceQuery: /module/,
-          use: [
-            options.isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
-            {
-              loader: 'css-loader',
-              options: {
-                modules: {
-                  localIdentName: '[local]_[hash:base64]',
-                },
-              },
-            },
-          ],
+          use: [options.isProduction ? MiniCssExtractPlugin.loader : 'style-loader', cssModuleLoaderConfig],
         },
         // this matches plain `<style>` or `<style scoped>`
         {
-          use: ['style-loader', 'css-loader'],
+          use: ['style-loader', cssLoaderConfig],
         },
       ],
     },
@@ -36,19 +53,12 @@ export default function styleLoaderConfig(options: Options) {
           resourceQuery: /module/,
           use: [
             options.isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
-            {
-              loader: 'css-loader',
-              options: {
-                modules: {
-                  localIdentName: '[local]_[hash:base64]',
-                },
-              },
-            },
-            'sass-loader',
+            cssModuleLoaderConfig,
+            sassLoaderConfigs,
           ],
         },
         {
-          use: ['style-loader', 'css-loader', 'sass-loader'],
+          use: ['style-loader', cssLoaderConfig, sassLoaderConfigs],
         },
       ],
     },
@@ -60,19 +70,12 @@ export default function styleLoaderConfig(options: Options) {
           resourceQuery: /module/,
           use: [
             options.isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
-            {
-              loader: 'css-loader',
-              options: {
-                modules: {
-                  localIdentName: '[local]_[hash:base64]',
-                },
-              },
-            },
-            'less-loader',
+            cssModuleLoaderConfig,
+            lessLoaderConfigs,
           ],
         },
         {
-          use: ['style-loader', 'css-loader', 'less-loader'],
+          use: ['style-loader', cssLoaderConfig, lessLoaderConfigs],
         },
       ],
     },

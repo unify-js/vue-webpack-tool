@@ -6,6 +6,7 @@ import path from 'node:path';
 
 import loaderConfig from './loader-configs/index.js';
 import { HtmlInjectDllPlugin } from './plugins/index.js';
+import type { ProjectConfig } from '../configTypes.js';
 
 export default function createWebpackCommonConfig(options: {
   outputDir: string;
@@ -15,6 +16,7 @@ export default function createWebpackCommonConfig(options: {
   publicPath: string;
   assetsDir: string;
   isProduction: boolean;
+  css?: ProjectConfig['css'];
 }): webpack.Configuration {
   const plugins: webpack.Configuration['plugins'] = [
     new webpack.ProgressPlugin(),
@@ -68,7 +70,7 @@ export default function createWebpackCommonConfig(options: {
           test: /\.vue$/,
           use: 'vue-loader',
         },
-        ...loaderConfig({ assetsDir: options.assetsDir, isProduction: options.isProduction }),
+        ...loaderConfig({ assetsDir: options.assetsDir, isProduction: options.isProduction, css: options.css }),
       ],
     },
   };
