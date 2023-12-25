@@ -1,5 +1,11 @@
 # @unify-js/vue-webpack-tool
 
+## 0.9.0
+
+### Minor Changes
+
+- f98d11b: support configuring loaders for CSS styles
+
 ## 0.8.0
 
 ### Minor Changes
