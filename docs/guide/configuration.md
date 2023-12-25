@@ -61,11 +61,38 @@ export default {
 ## devServer
 
 - Type: `webpack.Configuration['devServer']`
+- Default: `undefined`
 
 [All options](https://webpack.js.org/configuration/dev-server/) for webpack-dev-server are supported.
 
 ## configureWebpack
 
 - Type: `webpack.Configuration`
+- Default: `undefined`
 
 The object will be merged into the final config using [webpack-merge](https://github.com/survivejs/webpack-merge).
+
+## css.loaderOptions
+
+- Type: `Object`
+- Default: `undefined`
+
+Pass options to CSS-related loaders. For example:
+
+```js
+export default {
+  css: {
+    loaderOptions: {
+      css: {
+        // options here will be passed to css-loader
+      },
+      sass: {
+        // options here will be passed to sass-loader
+      },
+      less: {
+        // options here will be passed to less-loader
+      },
+    },
+  },
+};
+```
