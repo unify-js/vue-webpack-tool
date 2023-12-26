@@ -1,6 +1,6 @@
 {
   "name": "@unify-js/vue-webpack-tool",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "A build tool for Vue development based on webpack, specifically designed to enhance the development experience.",
   "type": "module",
   "scripts": {

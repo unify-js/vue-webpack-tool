@@ -1,5 +1,11 @@
 # @unify-js/vue-webpack-tool
 
+## 0.9.1
+
+### Patch Changes
+
+- b0cec7a: configure webpack resolve.alias
+
 ## 0.9.0
 
 ### Minor Changes
