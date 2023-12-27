@@ -31,6 +31,11 @@ export default function createWebpackDevConfig(options: {
         },
       },
 
+      output: {
+        // https://webpack.js.org/guides/build-performance/#output-without-path-info
+        pathinfo: false,
+      },
+
       cache: {
         type: 'filesystem',
         cacheDirectory: options.cacheDirectory,
