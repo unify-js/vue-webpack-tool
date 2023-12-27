@@ -1,5 +1,12 @@
 # @unify-js/vue-webpack-tool
 
+## 0.9.2
+
+### Patch Changes
+
+- 0b822e8: turn off path info in dev mode
+- 4fc95d3: support resolve .vue extension
+
 ## 0.9.1
 
 ### Patch Changes
