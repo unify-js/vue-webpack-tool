@@ -58,8 +58,8 @@ export default function createWebpackCommonConfig(options: {
     },
 
     resolve: {
-      // https://webpack.js.org/configuration/dev-server/#devserverhistoryapifallback
-      extensions: ['.ts', '.js', '.tsx', '.json', '.wasm'],
+      // https://webpack.js.org/configuration/resolve/#resolveextensions
+      extensions: ['.ts', '.js', '.tsx', '.vue', '.json', '.wasm'],
       alias: {
         '@': path.resolve(process.cwd(), 'src/'),
       },
