@@ -7,7 +7,7 @@ The file should export an object containing options:
 ```js
 // vue-webpack-tool.config.mjs
 
-/** @type {import('@unify-js/vue-webpack-tool/bin/configTypes').ProjectConfig} */
+/** @type {import('@unify-js/vue-webpack-tool/bin/configTypes').UserConfig} */
 export default {
   // ...
 };

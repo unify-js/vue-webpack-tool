@@ -1,4 +1,4 @@
-/** @type {import('@unify-js/vue-webpack-tool/bin/configTypes').ProjectConfig} */
+/** @type {import('@unify-js/vue-webpack-tool/bin/configTypes').UserConfig} */
 const config = {
   // ...
 };

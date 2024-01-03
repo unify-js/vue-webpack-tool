@@ -1,6 +1,6 @@
 import type webpack from 'webpack';
 
-export interface ProjectConfig {
+export interface UserConfig {
   assetsDir?: string;
   publicPath?: string;
   outputDir?: string;

@@ -3,7 +3,7 @@ import path from 'node:path';
 import fs from 'node:fs';
 import { merge } from 'webpack-merge';
 
-import type { ProjectConfig } from '../configTypes.js';
+import type { UserConfig } from '../configTypes.js';
 import { webpackCommonConfig, webpackDevConfig, webpackProdConfig, webpackDllConfig } from '../configs/index.js';
 
 export default class WebpackConfig {
@@ -32,7 +32,7 @@ export default class WebpackConfig {
     const vueWebpackToolConfigPath = path.resolve(process.cwd(), 'vue-webpack-tool.config.mjs');
     if (fs.existsSync(vueWebpackToolConfigPath)) {
       const { default: userConfig } = (await import(vueWebpackToolConfigPath)) as {
-        default: ProjectConfig;
+        default: UserConfig;
       };
       const { publicPath, outputDir, devServer, assetsDir } = userConfig;
 
