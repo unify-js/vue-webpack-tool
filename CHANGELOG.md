@@ -1,5 +1,11 @@
 # @unify-js/vue-webpack-tool
 
+## 0.9.3
+
+### Patch Changes
+
+- 7d8e401: Split dependencies into a single chunk.
+
 ## 0.9.2
 
 ### Patch Changes
