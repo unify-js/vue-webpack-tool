@@ -1,5 +1,11 @@
 # @unify-js/vue-webpack-tool
 
+## 0.9.4
+
+### Patch Changes
+
+- d46bdf3: esbuild-loader exclude node_modules
+
 ## 0.9.3
 
 ### Patch Changes
