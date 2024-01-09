@@ -3,6 +3,7 @@
 export default [
   {
     test: /\.js$/,
+    exclude: /node_modules/,
     loader: 'esbuild-loader',
     options: {
       loader: 'js',
@@ -12,6 +13,7 @@ export default [
 
   {
     test: /\.jsx$/,
+    exclude: /node_modules/,
     loader: 'esbuild-loader',
     options: {
       loader: 'jsx',
@@ -21,6 +23,7 @@ export default [
 
   {
     test: /\.ts$/,
+    exclude: /node_modules/,
     loader: 'esbuild-loader',
     options: {
       loader: 'ts',
@@ -30,6 +33,7 @@ export default [
 
   {
     test: /\.tsx$/,
+    exclude: /node_modules/,
     loader: 'esbuild-loader',
     options: {
       loader: 'tsx',
