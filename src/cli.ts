@@ -2,7 +2,7 @@
 
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
-import { Command, Argument } from 'commander';
+import { Command } from 'commander';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -60,7 +60,7 @@ program
     let mode: 'dev' | 'prod' = 'dev';
     if (options.prod) mode = 'prod';
 
-    clearDllFiles(webpackConfig.dllDirectory);
+    clearDllFiles(webpackConfig.pathInfo.path.dllDirectory);
     webpack(webpackConfig.getWebpackDllConfig({ mode }), displayInfo);
   });
 
@@ -68,7 +68,7 @@ program
   .command('clear')
   .description('clear all generated files')
   .action(() => {
-    clearOldFiles(webpackConfig.tempDirectory);
+    clearOldFiles(webpackConfig.pathInfo.path.tempDirectory);
   });
 
 program.parse();

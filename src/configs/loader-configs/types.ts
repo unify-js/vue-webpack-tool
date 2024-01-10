@@ -1,7 +1,7 @@
-import type { UserConfig } from '../../configTypes.js';
+import type { UserConfigInterface } from '../../configTypes.js';
 
 export interface Options {
   isProduction: boolean;
   assetsDir: string;
-  css?: UserConfig['css'];
+  css?: UserConfigInterface['css'];
 }

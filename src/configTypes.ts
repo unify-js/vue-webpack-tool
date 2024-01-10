@@ -1,9 +1,12 @@
 import type webpack from 'webpack';
 
-export interface UserConfig {
+export interface UserDefinePath {
   assetsDir?: string;
   publicPath?: string;
   outputDir?: string;
+}
+
+export type UserConfigInterface = UserDefinePath & {
   devServer?: webpack.Configuration['devServer'];
   configureWebpack?: webpack.Configuration;
   css: {
@@ -13,4 +16,4 @@ export interface UserConfig {
       less: Record<string, unknown>;
     };
   };
-}
+};

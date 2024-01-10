@@ -6,7 +6,7 @@ import path from 'node:path';
 
 import loaderConfig from './loader-configs/index.js';
 import { HtmlInjectDllPlugin } from './plugins/index.js';
-import type { UserConfig } from '../configTypes.js';
+import type { UserConfigInterface } from '../configTypes.js';
 
 export default function createWebpackCommonConfig(options: {
   outputDir: string;
@@ -16,7 +16,7 @@ export default function createWebpackCommonConfig(options: {
   publicPath: string;
   assetsDir: string;
   isProduction: boolean;
-  css?: UserConfig['css'];
+  css?: UserConfigInterface['css'];
 }): webpack.Configuration {
   const plugins: webpack.Configuration['plugins'] = [
     new webpack.ProgressPlugin(),
