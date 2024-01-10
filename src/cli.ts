@@ -60,7 +60,7 @@ program
     let mode: 'dev' | 'prod' = 'dev';
     if (options.prod) mode = 'prod';
 
-    clearDllFiles(webpackConfig.pathInfo.path.dllDirectory);
+    clearDllFiles(webpackConfig.path.dllDirectory);
     webpack(webpackConfig.getWebpackDllConfig({ mode }), displayInfo);
   });
 
@@ -68,7 +68,7 @@ program
   .command('clear')
   .description('clear all generated files')
   .action(() => {
-    clearOldFiles(webpackConfig.pathInfo.path.tempDirectory);
+    clearOldFiles(webpackConfig.path.tempDirectory);
   });
 
 program.parse();

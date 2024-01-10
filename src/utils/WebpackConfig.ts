@@ -16,7 +16,7 @@ export default class WebpackConfig {
     dependencies: Record<string, string>;
   };
   userConfig = userConfig;
-  pathInfo = new PathInfo(userConfig.userDefinePath);
+  path = new PathInfo(userConfig.userDefinePath).path;
 
   constructor() {
     this.projectPackageJson = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'package.json'), 'utf-8')) as {
@@ -32,12 +32,12 @@ export default class WebpackConfig {
   }): Promise<webpack.Configuration> {
     return merge(
       webpackCommonConfig({
-        ...this.pathInfo.path,
+        ...this.path,
         isProduction: false,
         dll: options?.dll,
       }),
       webpackDevConfig({
-        ...this.pathInfo.path,
+        ...this.path,
         lazy: options?.lazy,
       }),
       this.userConfig.webpackConfig
@@ -47,11 +47,11 @@ export default class WebpackConfig {
   async getWebpackProdConfig(options?: { dll?: boolean; assetsDir?: string }): Promise<webpack.Configuration> {
     return merge(
       webpackCommonConfig({
-        ...this.pathInfo.path,
+        ...this.path,
         dll: options?.dll,
         isProduction: true,
       }),
-      webpackProdConfig({ ...this.pathInfo.path }),
+      webpackProdConfig({ ...this.path }),
       this.userConfig.webpackConfig
     );
   }
@@ -60,7 +60,7 @@ export default class WebpackConfig {
     return merge(
       webpackDllConfig({
         dependencies: Object.keys(this.projectPackageJson.dependencies),
-        ...this.pathInfo.path,
+        ...this.path,
       }),
       {
         mode: options.mode === 'prod' ? 'production' : 'development',
