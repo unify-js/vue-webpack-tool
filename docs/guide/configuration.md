@@ -38,9 +38,13 @@ The directory where the production build files will be generated in when running
 For example:
 
 ```ts
-export default {
-  outputDir: 'dist',
+import { fileURLToPath } from 'node:url';
+
+const config = {
+  outputDir: fileURLToPath(new URL('dist', import.meta.url)),
 };
+
+export default config;
 ```
 
 ## assetsDir
