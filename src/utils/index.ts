@@ -3,7 +3,7 @@ import ora from 'ora';
 
 import type webpack from 'webpack';
 
-export function displayInfo(err: Error | undefined, stats: webpack.Stats | undefined) {
+export function displayInfo(err: Error | null, stats: webpack.Stats | undefined) {
   // https://webpack.js.org/api/node/#error-handling
 
   // The err object will only contain webpack-related issues, such as misconfiguration
