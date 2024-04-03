@@ -1,5 +1,11 @@
 # @unify-js/vue-webpack-tool
 
+## 0.9.5
+
+### Patch Changes
+
+- 73afaa9: update versions of dependencies
+
 ## 0.9.4
 
 ### Patch Changes
